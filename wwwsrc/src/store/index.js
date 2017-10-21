@@ -38,12 +38,15 @@ var store = new vuex.Store({
         },
         setTodos(state, obj) {
             for (var i = 0; i < obj.length; i++) {
-                // console.log(obj[i])
+                // console.log('obj',obj[i])
                 var item = obj[i]
                 vue.set(state.todos, item._id, item)
 
             }
             // console.log('setting todo', state.todos)
+        },
+        updateTodo(state, obj){
+            vue.set(state.todos, obj._id, obj)
         },
         addTodo(state, obj) {
             vue.set(state.todos, obj._id, obj)
@@ -58,13 +61,22 @@ var store = new vuex.Store({
         }
     },
     actions: {
-
+        toggleComplete({ commit, dispatch }, obj) {
+            api.put(`user/${obj.userId}/todos/${obj.todoId}`)
+                .then(res => {
+                    // console.log(res)
+                    commit('updateTodo', res.data.data)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
         deleteTodo({ commit, dispatch }, obj) {
             api.delete(`todo/${obj.todoId}`)
                 .then(res => {
                     // console.log('delete', res)
                     // commit('resetState')
-                    dispatch('getTodos')
+                    dispatch('getUserTodos', obj.userId)
                 })
                 .catch(err => {
                     commit('handleError', err)

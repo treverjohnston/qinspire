@@ -14,7 +14,7 @@ module.exports = {
   //       })
   //   }
   // },
-  profileVaults: {
+  userTodos: {
     path: '/user/:userId/todos',
     reqType: 'get',
     method(req, res, next){
@@ -22,6 +22,23 @@ module.exports = {
       Todos.find({creatorId: req.params.userId})
         .then(todos => {
           res.send(handleResponse(action, todos))
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
+  updateTodos: {
+    path: '/user/:userId/todos/:todoId',
+    reqType: 'put',
+    method(req, res, next){
+      let action = 'Toggle complete'
+      Todos.findById({_id: req.params.todoId})
+        .then(todo => {
+          // console.log('todo1', todo)
+          todo.completed = !todo.completed
+          todo.save()
+          // console.log('todo2', todo)
+          res.send(handleResponse(action, todo))
         }).catch(error => {
           return next(handleResponse(action, null, error))
         })
