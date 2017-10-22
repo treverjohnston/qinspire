@@ -71,16 +71,17 @@ var store = new vuex.Store({
         },
         setPhoto(state, obj) {
             state.photo = obj
+            console.log(state.photo)
         }
     },
     actions: {
         getPhoto({ commit, dispatch }) {
             photo(`?key=6793092-b357b650fc9892c6dfeb79192&q=nature+landscape&image_type=photo`)
                 .then(res => {
-                    console.log(res)
+                    // console.log(res)
                     // debugger
                     var rand = Math.floor((Math.random() * res.data.hits.length) + 1);
-                    commit('setPhoto', res.data.hits.rand)
+                    commit('setPhoto', res.data.hits[rand])
                 })
                 .catch(err => {
                     commit('handleError', err)
