@@ -1,20 +1,36 @@
 <template>
     <div class="todo">
-        <h1>Todo List</h1>
+        <q-btn push class="full-width" color="deep-purple" @click="addItem" icon="note_add">Add New Item</q-btn>
         <div v-for="item in todos">
             <q-list inset-separator>
                 <div v-if="item.completed">
-                    <q-collapsible @click="toggleComplete(item._id)" icon-toggle icon="done" :label="item.title">
+                    <q-item>
+                        <q-item-side left>
+                            <q-btn small push class="list" color="green-9" round icon="done" @click="toggleComplete(item._id)"></q-btn>
+                        </q-item-side>
+                        <q-item-main></q-item-main>
+                        <q-item-side right>
+                            <q-btn class="delete" small @click="deleteTask(item._id)" push round icon="delete"></q-btn>
+                        </q-item-side>
+                    </q-item>
+                    <q-collapsible indent @click="toggleComplete(item._id)" :label="item.title">
                         <div>
-                            <q-btn @click="toggleComplete(item._id)" icon="done"></q-btn>
                             <p>{{item.description}}</p>
                         </div>
                     </q-collapsible>
                 </div>
                 <div v-else>
-                    <q-collapsible @click="toggleComplete(item._id)" icon-toggle icon="clear" :label="item.title">
+                    <q-item>
+                        <q-item-side left>
+                            <q-btn push small class="list" color="red-9" round icon="clear" @click="toggleComplete(item._id)"></q-btn>
+                        </q-item-side>
+                        <q-item-main></q-item-main>
+                        <q-item-side right>
+                            <q-btn class="delete" small @click="deleteTask(item._id)" push round icon="delete"></q-btn>
+                        </q-item-side>
+                    </q-item>
+                    <q-collapsible indent @click="toggleComplete(item._id)" :label="item.title">
                         <div>
-                                <q-btn @click="toggleComplete(item._id)" icon="clear"></q-btn>                                
                             <p>{{item.description}}</p>
                         </div>
                     </q-collapsible>
@@ -28,7 +44,12 @@
     import {
         QBtn,
         QCollapsible,
-        QList
+        QList,
+        QItemMain,
+        QItemSide,
+        QItemTile,
+        Dialog,
+        QItem
     } from 'quasar'
 
     export default {
@@ -36,7 +57,12 @@
         components: {
             QBtn,
             QCollapsible,
-            QList
+            QList,
+            QItemMain,
+            QItemSide,
+            QItemTile,
+            Dialog,
+            QItem
         },
         data() {
             return {
@@ -46,21 +72,89 @@
             todos() {
                 return this.$store.state.todos
             },
-            info(){
+            info() {
                 return this.$store.state.info
             }
         },
-        methods:{
-            toggleComplete(id){
+        methods: {
+            toggleComplete(id) {
                 var obj = {
                     userId: this.info._id,
                     todoId: id
                 }
                 this.$store.dispatch('toggleComplete', obj)
+            },
+            addItem() {
+                Dialog.create({
+                    title: 'Add a ToDo Item',
+                    // message: `Currently logged in as ${this.info.name}`,
+                    form: {
+                        title: {
+                            type: 'text',
+                            label: 'Task',
+                            model: ''
+                        },
+                        description: {
+                            type: 'text',
+                            label: 'Description',
+                            model: ''
+                        }
+                    },
+                    buttons: [
+                        {
+                            label: 'Cancel',
+                            color: 'negative'
+                        },
+                        {
+                            label: 'Add Item',
+                            handler: (data) => {
+                                this.$store.dispatch('addTodo', data)
+                            }
+                        }
+                    ]
+                })
+            },
+            deleteTask(id) {
+                var obj = {
+                    todoId: id,
+                    userId: this.info._id
+                }
+                var _this = this
+                swal("Are you sure you want to delete this?", {
+                    buttons: {
+                        cancel: "Nope!",
+                        delete: true,
+                    },
+                })
+                    .then((value) => {
+                        switch (value) {
+                            case "delete":
+                            this.$store.dispatch('deleteTodo', obj)
+                                swal("Welp, that's gone forever");
+                                break;
+
+                            case "cancel":
+                                return;
+
+                            default:
+                                return;
+                        }
+                    })
             }
+        },
+        mounted() {
+            // this.$store.dispatch('getUserTodos', this.info._id)
         }
     }
 </script>
 
-<style>
+<style scoped>
+    .list {
+        margin-bottom: 1rem;
+    }
+
+    .delete {
+        color: rgb(190, 5, 5);
+        margin-bottom: .5rem; 
+    }
 </style>

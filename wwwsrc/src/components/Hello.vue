@@ -1,9 +1,11 @@
 <template>
-  <q-layout class="back" ref="layout" view="lHh Lpr fff" :left-class="{'bg-grey-2': true}">
+  <q-layout :style="{ backgroundImage: 'url(' + photo + ')' }" class="back" ref="layout" view="lHh Lpr fff" :left-class="{'bg-grey-2': true}">
     <q-toolbar slot="header" class="glossy topbar">
-      <q-btn flat @click="$refs.layout.toggleLeft()">
-        <q-icon name="menu" />
-      </q-btn>
+      <div v-if="info._id != null">
+        <q-btn flat @click="$refs.layout.toggleLeft()">
+          <q-icon name="menu" />
+        </q-btn>
+      </div>
 
       <q-toolbar-title>
         Inspire
@@ -30,25 +32,6 @@
       <div>
         <todo></todo>
       </div>
-      <!-- <q-list no-border link inset-delimiter>
-        <q-list-header>Essential Links</q-list-header>
-        <q-item @click="launch('http://quasar-framework.org')">
-          <q-item-side icon="school" />
-          <q-item-main label="Docs" sublabel="quasar-framework.org" />
-        </q-item>
-        <q-item @click="launch('http://forum.quasar-framework.org')">
-          <q-item-side icon="record_voice_over" />
-          <q-item-main label="Forum" sublabel="forum.quasar-framework.org" />
-        </q-item>
-        <q-item @click="launch('https://gitter.im/quasarframework/Lobby')">
-          <q-item-side icon="chat" />
-          <q-item-main label="Gitter Channel" sublabel="Quasar Lobby" />
-        </q-item>
-        <q-item @click="launch('https://twitter.com/quasarframework')">
-          <q-item-side icon="rss feed" />
-          <q-item-main label="Twitter" sublabel="@quasarframework" />
-        </q-item>
-      </q-list> -->
     </div>
 
     <!--
@@ -142,6 +125,9 @@
       },
       info() {
         return this.$store.state.info
+      },
+      photo(){
+        return this.$store.state.photo
       }
     },
     methods: {
@@ -210,7 +196,8 @@
       login() {
         Dialog.create({
           title: 'Login',
-          // message: 'What do you want to call your board?',
+          message: 'Need an account? Press the \'Register\' button below',
+          position: 'left',
           form: {
             email: {
               type: 'email',
@@ -224,9 +211,13 @@
             }
           },
           buttons: [
-            'Cancel',
+          {
+              label: 'Cancel',
+              color: 'negative'
+            },
             {
-              label: 'Ok',
+              label: 'Login',
+              color: 'positive',
               handler: (data) => {
                 this.$store.dispatch('login', data)
               }
@@ -243,7 +234,8 @@
       register() {
         Dialog.create({
           title: 'Register',
-          // message: 'What do you want to call your board?',
+          message: 'Already have an account? Press the \'Login\' button below',
+          position: 'right',
           form: {
             name: {
               type: 'text',
@@ -262,17 +254,21 @@
             }
           },
           buttons: [
-            'Cancel',
             {
-              label: 'Ok',
-              handler: (data) => {
-                this.$store.dispatch('register', data)
-              }
+              label: 'Cancel',
+              color: 'negative'
             },
             {
               label: 'Login',
+              color: 'positive',
               handler: () => {
                 this.login()
+              }
+            },
+            {
+              label: 'Register',
+              handler: (data) => {
+                this.$store.dispatch('register', data)
               }
             }
           ]
@@ -291,8 +287,8 @@
           document.addEventListener('mousemove', this.move)
         }
       })
-      if (this.$store.state.info._id != null) {
-        this.$store.dispatch('getUserTodos', info._id)
+      if (this.$store.state.info._id) {
+        this.$store.dispatch('getUserTodos', this.info._id)
       }
       this.$refs.layout.toggleLeft()
     },
@@ -310,11 +306,12 @@
   }
 </script>
 
-<style lang="stylus">
-  .topbar{
+<style>
+  .topbar {
     background-color: rgba(255, 255, 255, .5);
     color: black;
   }
+
   .logo-container {
     width: 50%;
     height: 242px;

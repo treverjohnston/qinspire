@@ -13,6 +13,7 @@
 
     mounted() {
       this.$store.dispatch('getAuth')
+      this.$store.dispatch('getPhoto')
     }
   }
 </script>

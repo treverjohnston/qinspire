@@ -18,6 +18,12 @@ let auth = axios.create({
     timeout: 4000,
     withCredentials: true
 })
+let photo = axios.create({
+    // baseURL: '//keepur.herokuapp.com/',
+    baseURL: 'https://pixabay.com/api',
+    timeout: 4000,
+    withCredentials: false
+})
 
 vue.use(vuex)
 
@@ -25,7 +31,8 @@ var store = new vuex.Store({
     state: {
         todos: {},
         logged: false,
-        info: {}
+        info: {},
+        photo: [{ webformatURL: "../assets/seaBackground.jpg" }]
     },
     mutations: {
         clearState(state) {
@@ -45,7 +52,7 @@ var store = new vuex.Store({
             }
             // console.log('setting todo', state.todos)
         },
-        updateTodo(state, obj){
+        updateTodo(state, obj) {
             vue.set(state.todos, obj._id, obj)
         },
         addTodo(state, obj) {
@@ -58,9 +65,27 @@ var store = new vuex.Store({
         setInfo(state, obj) {
             state.info = obj.data
             // console.log('info', state.info)
+        },
+        clearTodos(state) {
+            state.todos = {}
+        },
+        setPhoto(state, obj) {
+            state.photo = obj
         }
     },
     actions: {
+        getPhoto({ commit, dispatch }) {
+            photo(`?key=6793092-b357b650fc9892c6dfeb79192&q=nature+landscape&image_type=photo`)
+                .then(res => {
+                    console.log(res)
+                    // debugger
+                    var rand = Math.floor((Math.random() * res.data.hits.length) + 1);
+                    commit('setPhoto', res.data.hits.rand)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
         toggleComplete({ commit, dispatch }, obj) {
             api.put(`user/${obj.userId}/todos/${obj.todoId}`)
                 .then(res => {
@@ -75,7 +100,7 @@ var store = new vuex.Store({
             api.delete(`todo/${obj.todoId}`)
                 .then(res => {
                     // console.log('delete', res)
-                    // commit('resetState')
+                    commit('clearTodos')
                     dispatch('getUserTodos', obj.userId)
                 })
                 .catch(err => {
@@ -96,19 +121,6 @@ var store = new vuex.Store({
                     // router.push('/')
                 })
         },
-        // getTodos({ commit, dispatch }) {
-        //     api('todo')
-        //         .then(res => {
-        //             // console.log('settinvaults', res.data.data)
-        //             commit('setTodos', res.data.data)
-        //         })
-        //         .catch(err => {
-        //             // console.log("eerrrroror")
-        //             commit('handleError', err)
-        //             // router.push('/')
-        //         })
-        // },
-
         addTodo({ commit, dispatch }, obj) {
             // console.log("add vault:", obj)
             api.post('todo', obj)
@@ -134,6 +146,7 @@ var store = new vuex.Store({
                         console.log("successful login")
                         commit('setLogged')
                         commit('setInfo', res.data)
+                        dispatch('getUserTodos', res.data.data._id)
                     } else {
                         console.log("login failed")
                     }
@@ -162,11 +175,16 @@ var store = new vuex.Store({
                                 console.log('I was closed by the timer')
                             }
                         })
-                        .catch(err => {
-                            commit('handleError', err)
-                            router.push('/')
-                        })
                     // console.log(res)
+                })
+                .catch(err => {
+                    swal({
+                        title: 'Something went wrong',
+                        text: 'Please try again',
+                        timer: 3000
+                    })
+                    commit('handleError', err)
+                    router.push('/')
                 })
         },
         login({ commit, dispatch }, obj) {
@@ -196,6 +214,10 @@ var store = new vuex.Store({
                     // console.log(res)
                 })
                 .catch(err => {
+                    swal({
+                        title: 'Invalid Username or Password',
+                        timer: 3000
+                    })
                     commit('handleError', err)
                     router.push('/')
                 })
