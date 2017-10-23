@@ -19,7 +19,7 @@ let auth = axios.create({
 let photo = axios.create({
     baseURL: 'https://www.splashbase.co/api/v1/images/search/',
     timeout: 4000,
-    withCredentials: true
+    withCredentials: false
 })
 // let quote = axios.create({
 //     baseURL: 'https://andruxnet-random-famous-quotes.p.mashape.com/',
@@ -33,7 +33,7 @@ let photo = axios.create({
 let quote = axios.create({
     baseURL: 'https://quotesondesign.com/api/3.0/',
     timeout: 4000,
-    withCredentials: true
+    withCredentials: false
 })
 
 vue.use(vuex)
