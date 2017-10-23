@@ -17,7 +17,7 @@ let auth = axios.create({
     withCredentials: true
 })
 let photo = axios.create({
-    baseURL: '//www.splashbase.co/api/v1/images/search/',
+    baseURL: '//bcw-getter.herokuapp.com/?url=http://www.splashbase.co/api/v1/images/search/',
     timeout: 4000,
     withCredentials: false
 })
