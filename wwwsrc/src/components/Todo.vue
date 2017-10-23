@@ -1,6 +1,6 @@
 <template>
     <div class="todo">
-        <q-btn push class="full-width" color="transparent" @click="addItem" icon="note_add">Add New Item</q-btn>
+        <q-btn push class="full-width bt" @click="addItem" icon="note_add">Add New Item</q-btn>
         <div v-for="item in todos">
             <q-list>
                 <div v-if="item.completed">
@@ -149,6 +149,9 @@
 </script>
 
 <style scoped>
+    .bt{
+        color: black;
+    }
     .list {
         margin-bottom: 1rem;
     }

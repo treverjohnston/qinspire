@@ -21,20 +21,20 @@ let photo = axios.create({
     timeout: 4000,
     withCredentials: false
 })
+let quote = axios.create({
+    baseURL: 'https://andruxnet-random-famous-quotes.p.mashape.com/',
+    timeout: 4000,
+    withCredentials: true,
+    headers: {
+        "X-Mashape-Key": "UpLWWSYZ0HmshPmFybLvFyrlOWEZp1RXVu3jsnVm0B3XONFr2c",
+        "Accept": "application/json"
+    }
+})
 // let quote = axios.create({
-//     baseURL: 'https://andruxnet-random-famous-quotes.p.mashape.com/',
+//     baseURL: '//quotesondesign.com/api/3.0/api-3.0.json',
 //     timeout: 4000,
 //     withCredentials: true,
-//     headers: {
-//         "X-Mashape-Key": "UpLWWSYZ0HmshPmFybLvFyrlOWEZp1RXVu3jsnVm0B3XONFr2c",
-//         "Accept": "application/json"
-//     }
 // })
-let quote = axios.create({
-    baseURL: '//bcw-getter.herokuapp.com/?url=' + encodeURIComponent('http://quotesondesign.com/api/3.0/api-3.0.json'),
-    timeout: 4000,
-    withCredentials: true
-})
 
 vue.use(vuex)
 
@@ -91,7 +91,7 @@ var store = new vuex.Store({
     },
     actions: {
         getQuote({ commit, dispatch }) {
-            quote('api-3.0.json')
+            quote('?cat=movies&count=1')
                 .then(res => {
                     console.log('resquote', res)
                     commit('setQuote', res.data)

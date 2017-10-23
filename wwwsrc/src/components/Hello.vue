@@ -351,6 +351,7 @@
   }
   .quo {
     color: white;
+    padding-top: 4rem;
   }
 
   .clock {
@@ -373,7 +374,7 @@
     transform: translateX(-50%) translateY(-50%);
   }
   .quote-container {
-    width: 80%;
+    width: 50%;
     height: 242px;
     perspective: 800px;
     position: absolute;
