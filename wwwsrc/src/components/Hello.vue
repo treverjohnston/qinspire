@@ -1,5 +1,5 @@
 <template>
-  <q-layout :style="{ backgroundImage: 'url(' + photo.webformatURL + ')' }" class="back" ref="layout" view="lHh Lpr fff" :left-class="{'bg-grey-2': true}">
+  <q-layout :style="{ backgroundImage: 'url(' + photo.large_url + ')' }" class="back" ref="layout" view="lHh Lpr fff" :left-class="{'bg-grey-2': true}">
     <q-toolbar slot="header" class="glossy topbar">
       <div v-if="info._id != null">
         <q-btn flat @click="$refs.layout.toggleLeft()">
@@ -9,7 +9,6 @@
 
       <q-toolbar-title>
         Inspire
-        <div slot="subtitle">Running on Quasar v{{$q.version}}</div>
       </q-toolbar-title>
       <div v-if="info._id == null">
         <q-btn flat link @click="login">
@@ -39,10 +38,30 @@
       <router-view /> component
       if using subRoutes
     -->
-    <div class="layout-padding logo-container non-selectable no-pointer-events">
+    <div class="layout-padding logo-container non-selectable no-pointer-events desktop-only">
       <div class="logo" :style="position">
-        <img src="~assets/quasar-logo-full.svg">
+        <!-- <img src="~assets/quasar-logo-full.svg"> -->
+        <h1 class="clock text-bold">{{h}}:{{m}}</h1>
       </div>
+    </div>
+    <div class="layout-padding quote-container non-selectable no-pointer-events desktop-only">
+      <div class="quo" :style="position">
+        <h4>{{quote.quote}}</h4>
+        <p>-{{quote.author}}</p>
+      </div>
+    </div>
+    <div class="layout-padding logo-container non-selectable no-pointer-events mobile-only">
+      <div class="logo">
+        <!-- <img src="~assets/quasar-logo-full.svg"> -->
+        <h1 class="clock text-bold">{{h}}:{{m}}</h1>
+        <div class="quo">
+          <h4>{{quote.quote}}</h4>
+          <h5>-{{quote.author}}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="fixed-bottom-right absolute-bottom-right">
+      <a class="src" :href="photo.url" target="_blank" >Image From Unspash.com</a>
     </div>
   </q-layout>
 </template>
@@ -110,6 +129,9 @@
         rotateY: 0,
         rotateX: 0,
         logging: true,
+        h: 0,
+        s: 0,
+        m: 0
       }
     },
     computed: {
@@ -126,8 +148,11 @@
       info() {
         return this.$store.state.info
       },
-      photo(){
+      photo() {
         return this.$store.state.photo
+      },
+      quote() {
+        return this.$store.state.quote
       }
     },
     methods: {
@@ -211,7 +236,7 @@
             }
           },
           buttons: [
-          {
+            {
               label: 'Cancel',
               color: 'negative'
             },
@@ -273,6 +298,19 @@
             }
           ]
         })
+      },
+      startTime() {
+        var today = new Date();
+        this.h = today.getHours();
+        this.m = today.getMinutes();
+        this.s = today.getSeconds();
+        this.m = this.checkTime(this.m);
+        this.s = this.checkTime(this.s);
+        var t = setTimeout(this.startTime, 500);
+      },
+      checkTime(i) {
+        if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+        return i;
       }
     },
     mounted() {
@@ -291,6 +329,7 @@
         this.$store.dispatch('getUserTodos', this.info._id)
       }
       this.$refs.layout.toggleLeft()
+      this.startTime()
     },
     beforeDestroy() {
       if (this.orienting) {
@@ -307,8 +346,20 @@
 </script>
 
 <style>
+  .src{
+    color: white
+  }
+  .quo {
+    color: white;
+  }
+
+  .clock {
+    font-size: 10rem;
+    color: white;
+  }
+
   .topbar {
-    background-color: rgba(255, 255, 255, .5);
+    background-color: rgba(255, 255, 255, .2);
     color: black;
   }
 
@@ -318,7 +369,16 @@
     perspective: 800px;
     position: absolute;
     top: 30%;
-    left: 65%;
+    left: 60%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  .quote-container {
+    width: 80%;
+    height: 242px;
+    perspective: 800px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     transform: translateX(-50%) translateY(-50%);
   }
 

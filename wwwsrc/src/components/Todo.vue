@@ -1,8 +1,8 @@
 <template>
     <div class="todo">
-        <q-btn push class="full-width" color="deep-purple" @click="addItem" icon="note_add">Add New Item</q-btn>
+        <q-btn push class="full-width" color="transparent" @click="addItem" icon="note_add">Add New Item</q-btn>
         <div v-for="item in todos">
-            <q-list inset-separator>
+            <q-list>
                 <div v-if="item.completed">
                     <q-item>
                         <q-item-side left>
@@ -129,7 +129,7 @@
                     .then((value) => {
                         switch (value) {
                             case "delete":
-                            this.$store.dispatch('deleteTodo', obj)
+                                this.$store.dispatch('deleteTodo', obj)
                                 swal("Welp, that's gone forever");
                                 break;
 
@@ -152,9 +152,12 @@
     .list {
         margin-bottom: 1rem;
     }
+    .q-list{
+        border: none;
+    }
 
     .delete {
         color: rgb(190, 5, 5);
-        margin-bottom: .5rem; 
+        margin-bottom: .5rem;
     }
 </style>

@@ -20,7 +20,21 @@ let auth = axios.create({
 })
 let photo = axios.create({
     // baseURL: '//keepur.herokuapp.com/',
-    baseURL: 'https://pixabay.com/api',
+    baseURL: 'http://www.splashbase.co/api/v1/images/search/',
+    timeout: 4000,
+    withCredentials: false
+})
+// let quote = axios.create({
+//     baseURL: 'https://andruxnet-random-famous-quotes.p.mashape.com/',
+//     timeout: 4000,
+//     withCredentials: true,
+//     headers: {
+//         "X-Mashape-Key": "UpLWWSYZ0HmshPmFybLvFyrlOWEZp1RXVu3jsnVm0B3XONFr2c",
+//         "Accept": "application/json"
+//     }
+// })
+let quote = axios.create({
+    baseURL: 'http://quotesondesign.com/api/3.0/',
     timeout: 4000,
     withCredentials: false
 })
@@ -32,7 +46,8 @@ var store = new vuex.Store({
         todos: {},
         logged: false,
         info: {},
-        photo: [{ webformatURL: "../assets/seaBackground.jpg" }]
+        photo: [{ webformatURL: "../assets/seaBackground.jpg" }],
+        quote: {}
     },
     mutations: {
         clearState(state) {
@@ -71,17 +86,30 @@ var store = new vuex.Store({
         },
         setPhoto(state, obj) {
             state.photo = obj
-            console.log(state.photo)
+            // console.log(state.photo)
+        },
+        setQuote(state, obj) {
+            state.quote = obj
         }
     },
     actions: {
+        getQuote({ commit, dispatch }) {
+            quote('api-3.0.json')
+                .then(res => {
+                    console.log('resquote', res)
+                    commit('setQuote', res.data)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
         getPhoto({ commit, dispatch }) {
-            photo(`?key=6793092-b357b650fc9892c6dfeb79192&q=nature+landscape&image_type=photo`)
+            photo(`?query=mountain`)
                 .then(res => {
                     // console.log(res)
                     // debugger
-                    var rand = Math.floor((Math.random() * res.data.hits.length) + 1);
-                    commit('setPhoto', res.data.hits[rand])
+                    var rand = Math.floor((Math.random() * res.data.images.length) + 1);
+                    commit('setPhoto', res.data.images[rand])
                 })
                 .catch(err => {
                     commit('handleError', err)
