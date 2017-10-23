@@ -22,16 +22,13 @@
       </div>
     </q-toolbar>
 
-    <div slot="left">
-      <!--
-        Use <q-side-link> component
-        instead of <q-item> for
-        internal vue-router navigation
-      -->
-      <div>
-        <todo></todo>
+    <!-- <div v-if="info._id != null"> -->
+      <div v-if="info._id != null" slot="left">
+        <div>
+          <todo></todo>
+        </div>
       </div>
-    </div>
+    <!-- </div> -->
 
     <!--
       Replace following <div> with
@@ -61,7 +58,7 @@
       </div>
     </div>
     <div class="fixed-bottom-right absolute-bottom-right">
-      <a class="src" :href="photo.url" target="_blank" >Image From Unspash.com</a>
+      <a class="src" :href="photo.url" target="_blank">Image From Unspash.com</a>
     </div>
   </q-layout>
 </template>
@@ -284,13 +281,6 @@
               color: 'negative'
             },
             {
-              label: 'Login',
-              color: 'positive',
-              handler: () => {
-                this.login()
-              }
-            },
-            {
               label: 'Register',
               handler: (data) => {
                 this.$store.dispatch('register', data)
@@ -346,9 +336,10 @@
 </script>
 
 <style>
-  .src{
+  .src {
     color: white
   }
+
   .quo {
     color: white;
     padding-top: 4rem;
@@ -373,6 +364,7 @@
     left: 60%;
     transform: translateX(-50%) translateY(-50%);
   }
+
   .quote-container {
     width: 50%;
     height: 242px;
