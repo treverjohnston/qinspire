@@ -7,19 +7,16 @@ var production = !window.location.host.includes('localhost');
 var baseUrl = production ? '//inspireq.herokuapp.com/' : '//localhost:3000/';
 
 let api = axios.create({
-    // baseURL: '//keepur.herokuapp.com/api/',
     baseURL: baseUrl + 'api/',
     timeout: 4000,
     withCredentials: true
 })
 let auth = axios.create({
-    // baseURL: '//keepur.herokuapp.com/',
     baseURL: baseUrl,
     timeout: 4000,
     withCredentials: true
 })
 let photo = axios.create({
-    // baseURL: '//keepur.herokuapp.com/',
     baseURL: 'http://www.splashbase.co/api/v1/images/search/',
     timeout: 4000,
     withCredentials: false
