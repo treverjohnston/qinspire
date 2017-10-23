@@ -93,7 +93,7 @@ var store = new vuex.Store({
         getQuote({ commit, dispatch }) {
             quote('?cat=movies&count=1')
                 .then(res => {
-                    console.log('resquote', res)
+                    // console.log('resquote', res)
                     commit('setQuote', res.data)
                 })
                 .catch(err => {
@@ -103,7 +103,7 @@ var store = new vuex.Store({
         getPhoto({ commit, dispatch }) {
             photo(`?query=mountain`)
                 .then(res => {
-                    console.log("pic res",res)
+                    // console.log("pic res",res)
                     // debugger
                     var rand = Math.floor((Math.random() * res.data.images.length) + 1);
                     res.data.images[rand].url = `//images.weserv.nl/?url=${res.data.images[rand].url}`
