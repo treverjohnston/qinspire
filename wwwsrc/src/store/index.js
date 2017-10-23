@@ -19,7 +19,7 @@ let auth = axios.create({
 let photo = axios.create({
     baseURL: '//www.splashbase.co/api/v1/images/search/',
     timeout: 4000,
-    withCredentials: true
+    withCredentials: false
 })
 // let quote = axios.create({
 //     baseURL: 'https://andruxnet-random-famous-quotes.p.mashape.com/',
@@ -31,7 +31,7 @@ let photo = axios.create({
 //     }
 // })
 let quote = axios.create({
-    baseURL: '//quotesondesign.com/api/3.0/',
+    baseURL: '//bcw-getter.herokuapp.com/?url=' + encodeURIComponent('http://quotesondesign.com/api/3.0/api-3.0.json'),
     timeout: 4000,
     withCredentials: true
 })
@@ -106,6 +106,7 @@ var store = new vuex.Store({
                     console.log("pic res",res)
                     // debugger
                     var rand = Math.floor((Math.random() * res.data.images.length) + 1);
+                    res.data.images[rand].url = `//images.weserv.nl/?url=${res.data.images[rand].url}`
                     commit('setPhoto', res.data.images[rand])
                 })
                 .catch(err => {
