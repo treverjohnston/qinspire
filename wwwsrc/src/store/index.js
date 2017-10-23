@@ -17,7 +17,7 @@ let auth = axios.create({
     withCredentials: true
 })
 let photo = axios.create({
-    baseURL: 'http://www.splashbase.co/api/v1/images/search/',
+    baseURL: '//www.splashbase.co/api/v1/images/search/',
     timeout: 4000,
     withCredentials: false
 })
@@ -31,7 +31,7 @@ let photo = axios.create({
 //     }
 // })
 let quote = axios.create({
-    baseURL: 'http://quotesondesign.com/api/3.0/',
+    baseURL: '//quotesondesign.com/api/3.0/',
     timeout: 4000,
     withCredentials: false
 })
@@ -103,7 +103,7 @@ var store = new vuex.Store({
         getPhoto({ commit, dispatch }) {
             photo(`?query=mountain`)
                 .then(res => {
-                    // console.log(res)
+                    console.log("pic res",res)
                     // debugger
                     var rand = Math.floor((Math.random() * res.data.images.length) + 1);
                     commit('setPhoto', res.data.images[rand])

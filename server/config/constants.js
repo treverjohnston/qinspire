@@ -9,25 +9,15 @@ const actions = {
 const models = {
   todo: {
     name: 'Todo',
-    endpoint: 'Todo',
+    endpoint: 'todo',
     useCustomRoutes: true
   },
-  keep: {
-    name: 'Keep',
-    endpoint: 'Keeps'
-    
+  image: {
+    name: 'Image',
+    endpoint: 'image',
+    useCustomRoutes: true,
+    preventDefaultApi: true,    
   },
-
-  task: {
-    name: 'Task',
-    endpoint: 'Tasks'
-  },
-
-  comments: {
-    name: 'Comments',
-    endpoint: 'Comments'
-  },
-
   user: {
     name: 'User',
     endpoint: 'users',
