@@ -17,7 +17,7 @@ let auth = axios.create({
     withCredentials: true
 })
 let photo = axios.create({
-    baseURL: 'http://www.splashbase.co/api/v1/images/search/',
+    baseURL: 'https://www.splashbase.co/api/v1/images/search/',
     timeout: 4000,
     withCredentials: true
 })
@@ -31,7 +31,7 @@ let photo = axios.create({
 //     }
 // })
 let quote = axios.create({
-    baseURL: 'http://quotesondesign.com/api/3.0/',
+    baseURL: 'https://quotesondesign.com/api/3.0/',
     timeout: 4000,
     withCredentials: true
 })
