@@ -1,7 +1,7 @@
 {
-  "name": "vue-kanban-server",
+  "name": "Inspire",
   "version": "1.0.0",
-  "description": "The server for keepr",
+  "description": "The server for inspire",
   "main": "index.js",
   "scripts": {
     "debug": "node index.js",

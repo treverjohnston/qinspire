@@ -328,7 +328,7 @@
       if (this.$store.state.info._id) {
         this.$store.dispatch('getUserTodos', this.info._id)
       }
-      this.$refs.layout.toggleLeft()
+      // this.$refs.layout.toggleLeft()
       this.startTime()
     },
     beforeDestroy() {
