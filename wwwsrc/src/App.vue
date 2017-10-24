@@ -21,6 +21,6 @@
 
 <style>
   .bg-grey-2{
-    background-color: rgba(255, 255, 255, .2) !important;
+    background-color: rgba(255, 255, 255, .8) !important;
   }
 </style>
