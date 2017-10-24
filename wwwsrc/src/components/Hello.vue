@@ -50,7 +50,7 @@
     <div class="layout-padding logo-container-mobile non-selectable no-pointer-events desktop-hide mobile-only">
       <div class="logo-mobile">
         <!-- <img src="~assets/quasar-logo-full.svg"> -->
-        <h1 class="clock-mobile text-bold">mobile{{h}}:{{m}}</h1>
+        <h1 class="clock-mobile text-bold">{{h}}:{{m}}</h1>
         <div class="quo-mobile">
           <h4>{{quote.quote}}</h4>
           <h5>-{{quote.author}}</h5>
@@ -378,7 +378,7 @@
     height: 242px;
     perspective: 800px;
     position: absolute;
-    top: 30%;
+    top: 20%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
   }
