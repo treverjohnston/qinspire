@@ -35,23 +35,23 @@
       <router-view /> component
       if using subRoutes
     -->
-    <div class="layout-padding logo-container non-selectable no-pointer-events desktop-only">
+    <div class="layout-padding logo-container non-selectable no-pointer-events mobile-hide desktop-only">
       <div class="logo" :style="position">
         <!-- <img src="~assets/quasar-logo-full.svg"> -->
         <h1 class="clock text-bold">{{h}}:{{m}}</h1>
       </div>
     </div>
-    <div class="layout-padding quote-container non-selectable no-pointer-events desktop-only">
+    <div class="layout-padding quote-container non-selectable no-pointer-events mobile-hide desktop-only">
       <div class="quo" :style="position">
-        <h4>{{quote.quote}}</h4>
-        <p>-{{quote.author}}</p>
+        <h4 class="desktop-only">{{quote.quote}}</h4>
+        <p class="desktop-only">-{{quote.author}}</p>
       </div>
     </div>
-    <div class="layout-padding logo-container non-selectable no-pointer-events mobile-only">
-      <div class="logo">
+    <div class="layout-padding logo-container-mobile non-selectable no-pointer-events desktop-hide mobile-only">
+      <div class="logo-mobile">
         <!-- <img src="~assets/quasar-logo-full.svg"> -->
-        <h1 class="clock text-bold">{{h}}:{{m}}</h1>
-        <div class="quo">
+        <h1 class="clock-mobile text-bold">mobile{{h}}:{{m}}</h1>
+        <div class="quo-mobile">
           <h4>{{quote.quote}}</h4>
           <h5>-{{quote.author}}</h5>
         </div>
@@ -349,6 +349,15 @@
     font-size: 10rem;
     color: white;
   }
+  .quo-mobile {
+    color: white;
+    padding-top: 2rem;
+  }
+
+  .clock-mobile {
+    font-size: 5rem;
+    color: white;
+  }
 
   .topbar {
     background-color: rgba(255, 255, 255, .2);
@@ -362,6 +371,15 @@
     position: absolute;
     top: 30%;
     left: 60%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  .logo-container-mobile {
+    width: 75%;
+    height: 242px;
+    perspective: 800px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
     transform: translateX(-50%) translateY(-50%);
   }
 
