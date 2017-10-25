@@ -3,7 +3,8 @@ import axios from 'axios'
 import vuex from 'vuex'
 import router from '../router'
 
-var production = !window.location.host.includes('localhost');
+// var production = !window.location.host.includes('localhost');
+var production = true;
 var baseUrl = production ? '//inspireq.herokuapp.com/' : '//localhost:3000/';
 
 let api = axios.create({
