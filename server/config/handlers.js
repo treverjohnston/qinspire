@@ -22,14 +22,14 @@ let defaultErrorHandler = (err, req, res, next) => {
 }
 
 //Default Urls 
-// var whitelist = ['http://localhost:8080', 'https://inspireq.herokuapp.com'];//add heroku website later
-var whitelist = ['*'];//add heroku website later
+var whitelist = ['http://localhost:8080', 'http://192.168.0.13:8080', 'https://inspireq.herokuapp.com'];//add heroku website later
+// var whitelist = ['*'];//add heroku website later
 var corsOptions = {
 	origin: function (origin, callback) {
 		var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
 		callback(null, originIsWhitelisted);
 	},
-	credentials: false
+	credentials: true
 };
 
 
