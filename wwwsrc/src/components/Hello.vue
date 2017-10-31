@@ -1,5 +1,5 @@
 <template>
-  <q-layout :style="{ backgroundImage: rand }" class="back" ref="layout" view="lHh Lpr fff" :left-class="{'bg-grey-2': true}">
+  <q-layout :style="{ backgroundImage: 'url(' + photo + ')' }" class="back" ref="layout" view="lHh Lpr fff" :left-class="{'bg-grey-2': true}">
     <q-toolbar slot="header" class="glossy topbar">
       <div v-if="info._id != null">
         <q-btn flat @click="$refs.layout.toggleLeft()">
@@ -133,7 +133,7 @@
     },
     computed: {
       rand() {
-                return "url('statics/pics/" + this.$store.state.rand + ".jpg')"
+                return this.$store.state.rand 
                 // return this.$store.state.rand1
             },
       position() {
@@ -150,7 +150,7 @@
         return this.$store.state.info
       },
       photo() {
-        return this.$store.state.photo
+        return this.$store.state.pics[this.rand]
       },
       quote() {
         return this.$store.state.quote

@@ -46,11 +46,43 @@ var store = new vuex.Store({
         info: {},
         photo: [{ webformatURL: "../assets/seaBackground.jpg" }],
         quote: {},
-        rand: 1
+        rand: 1,
+        pics: {
+            1: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471698/inspire/13.jpg',
+            2: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471698/inspire/12.jpg',
+            3: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471699/inspire/10.jpg',
+            4: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471697/inspire/11.jpg',
+            5: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471697/inspire/9.jpg',
+            6: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471698/inspire/8.jpg',
+            7: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471698/inspire/7.jpg',
+            8: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471695/inspire/6.jpg',
+            9: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471695/inspire/4.jpg',
+            10: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471695/inspire/5.jpg',
+            11: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471695/inspire/3.jpg',
+            12: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471695/inspire/2.jpg',
+            13: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471693/inspire/1.jpg',
+            14: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471693/inspire/30.jpg',
+            15: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471694/inspire/29.jpg',
+            16: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471693/inspire/28.jpg',
+            17: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471693/inspire/27.jpg',
+            18: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471693/inspire/26.jpg',
+            19: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471691/inspire/25.jpg',
+            20: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471691/inspire/24.jpg',
+            21: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471691/inspire/23.jpg',
+            22: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471691/inspire/22.jpg',
+            23: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471689/inspire/21.jpg',
+            24: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471690/inspire/20.jpg',
+            25: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471688/inspire/19.jpg',
+            26: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471688/inspire/18.jpg',
+            26: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471687/inspire/17.jpg',
+            27: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471689/inspire/15.jpg',
+            28: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471688/inspire/16.jpg',
+            29: 'http://res.cloudinary.com/treverscloud/image/upload/v1509471689/inspire/14.jpg'
+        }
     },
     mutations: {
         randoms(state) {
-            var rand = Math.floor((Math.random() * 30) + 1);
+            var rand = Math.floor((Math.random() * 29) + 1);
 
             state.rand = rand
         },
