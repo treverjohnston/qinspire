@@ -15,6 +15,8 @@
       this.$store.dispatch('getAuth')
       this.$store.dispatch('getPhoto')
       this.$store.dispatch('getQuote')
+      this.$store.commit('randoms')
+
     }
   }
 </script>
