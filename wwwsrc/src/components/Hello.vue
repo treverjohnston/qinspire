@@ -58,7 +58,7 @@
       </div>
     </div>
     <div class="fixed-bottom-right absolute-bottom-right">
-      <a class="src" :href="photo.url" target="_blank">Image From Unspash.com</a>
+      <a class="src" href="//unsplash.com/" target="_blank">Image From Unsplash.com</a>
     </div>
   </q-layout>
 </template>
