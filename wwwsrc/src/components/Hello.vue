@@ -1,5 +1,5 @@
 <template>
-  <q-layout :style="{ backgroundImage: 'url(' + rand + ')' }" class="back" ref="layout" view="lHh Lpr fff" :left-class="{'bg-grey-2': true}">
+  <q-layout :style="{ backgroundImage: `url(${rand})` }" class="back" ref="layout" view="lHh Lpr fff" :left-class="{'bg-grey-2': true}">
     <q-toolbar slot="header" class="glossy topbar">
       <div v-if="info._id != null">
         <q-btn flat @click="$refs.layout.toggleLeft()">
@@ -347,20 +347,27 @@
   .quo {
     color: white;
     padding-top: 4rem;
+    text-shadow: 0 0 3px black;
+
   }
 
   .clock {
     font-size: 10rem;
     color: white;
+    text-shadow: 0 0 3px black;
   }
   .quo-mobile {
     color: white;
     padding-top: 2rem;
+    text-shadow: 0 0 3px black;
+
   }
 
   .clock-mobile {
     font-size: 5rem;
     color: white;
+    text-shadow: 0 0 3px black;
+
   }
 
   .topbar {
