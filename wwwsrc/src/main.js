@@ -4,6 +4,7 @@
 // require(`./themes/app.${__THEME}.styl`)
 // 2. or, use next line to activate DEFAULT QUASAR STYLE
 require(`quasar/dist/quasar.${__THEME}.css`)
+require('calvin-and-hobbes-quotes')
 // ==============================
 
 // Uncomment the following lines if you need IE11/Edge support
@@ -15,6 +16,7 @@ import Quasar from 'quasar'
 import router from './router'
 import store from './store'
 import swal from 'sweetalert'
+import calvinAndHobbesQuotes from 'calvin-and-hobbes-quotes'
 
 
 

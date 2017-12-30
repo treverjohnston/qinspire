@@ -129,16 +129,16 @@ var store = new vuex.Store({
         }
     },
     actions: {
-        getQuote({ commit, dispatch }) {
-            quote('?cat=movies&count=1')
-                .then(res => {
-                    // console.log('resquote', res)
-                    commit('setQuote', res.data)
-                })
-                .catch(err => {
-                    commit('handleError', err)
-                })
-        },
+        // getQuote({ commit, dispatch }) {
+        //     quote('?cat=movies&count=1')
+        //         .then(res => {
+        //             // console.log('resquote', res)
+        //             commit('setQuote', res.data)
+        //         })
+        //         .catch(err => {
+        //             commit('handleError', err)
+        //         })
+        // },
         getPhoto({ commit, dispatch }) {
             photo(`?query=mountain`)
                 .then(res => {

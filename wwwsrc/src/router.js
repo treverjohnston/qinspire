@@ -26,7 +26,8 @@ export default new VueRouter({
 
   routes: [
     {
-      path: '/', component: load('Hello'),
+      path: '/', 
+      component: load('Hello'),
       children: [
         {
           path: 'todo',

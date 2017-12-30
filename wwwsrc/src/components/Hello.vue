@@ -43,8 +43,8 @@
     </div>
     <div class="layout-padding quote-container non-selectable no-pointer-events mobile-hide desktop-only">
       <div class="quo" :style="position">
-        <h4 class="desktop-only">{{quote.quote}}</h4>
-        <p class="desktop-only">-{{quote.author}}</p>
+        <h4 class="desktop-only">{{quote}}</h4>
+        <p class="desktop-only">-Calvin And Hobbes</p>
       </div>
     </div>
     <div class="layout-padding logo-container-mobile non-selectable no-pointer-events desktop-hide mobile-only">
@@ -52,8 +52,8 @@
         <!-- <img src="~assets/quasar-logo-full.svg"> -->
         <h1 class="clock-mobile text-bold">{{h}}:{{m}}</h1>
         <div class="quo-mobile">
-          <h4>{{quote.quote}}</h4>
-          <h5>-{{quote.author}}</h5>
+          <h4>{{quote}}</h4>
+          <h5>-Calvin And Hobbes</h5>
         </div>
       </div>
     </div>
@@ -65,6 +65,7 @@
 
 <script>
   import Todo from './Todo'
+  import calvinAndHobbesQuotes from 'calvin-and-hobbes-quotes'
   import {
     dom,
     event,
@@ -153,7 +154,8 @@
         return this.$store.state.pics[this.rand]
       },
       quote() {
-        return this.$store.state.quote
+        // return this.$store.state.quote
+        return calvinAndHobbesQuotes.random()
       }
     },
     methods: {
